@@ -88,7 +88,9 @@ class ImageColorizationPipeline(Pipeline):
         logger.info('load model done')
 
     def preprocess(self, input: Input) -> Dict[str, Any]:
-        img = LoadImage.convert_to_img(input).convert('LA').convert('RGB')
+        # img = cv2.imread(input)
+        # img = PIL.Image.fromarray(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
+        img = PIL.Image.open(input).convert('RGB')
 
         self.wide, self.height = img.size
         if self.wide * self.height < 100000:

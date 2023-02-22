@@ -1,0 +1,9 @@
+{
+    "framework": "pytorch",
+
+    "task": "image-colorization",    
+
+    "pipeline": {
+        "type": "unet-image-colorization"
+    }
+}
