@@ -45,3 +45,4 @@ torchvision
 transformers>=4.26.0
 ujson
 utils
+wget
