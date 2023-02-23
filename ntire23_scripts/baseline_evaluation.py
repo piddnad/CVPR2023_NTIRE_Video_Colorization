@@ -58,9 +58,11 @@ class Evaluater(object):
         t1 = time.time()
         print(f'Calculating FID...')
         fid = calculate_fid(output_dir)
+
         t2 = time.time()
         print('Calculating CDC...')
         cdc = calculate_cdc(output_dir)
+
         t3 = time.time()
         print('FID evaluation time:', t2-t1)
         print('CDC evaluation time:', t3-t2)
@@ -69,21 +71,19 @@ class Evaluater(object):
         return fid, cdc
 
 if __name__ == '__main__':
-    data_root_dir = '/path/to/trainingset' # 下载的数据集路径
     model_id = 'damo/cv_unet_video-colorization'
-    cache_path = os.path.expanduser('~/.cache/modelscope/hub/damo/cv_unet_video-colorization/')
+    cache_path = os.path.expanduser('~/.cache/modelscope/hub/damo/cv_unet_video-colorization')
     cfg_file = os.path.join(cache_path ,'configuration.json')
+
+    kwargs = dict(
+        cfg_file=cfg_file,
+        model=model_id,
+    )
+
+    trainer = build_trainer(name=Trainers.video_colorization, default_args=kwargs)
 
     # copy config
     os.makedirs(cache_path, exist_ok=True)
     shutil.copy2('ntire23_scripts/configuration.json', cfg_file)
 
-    kwargs = dict(
-        cfg_file=cfg_file,
-        model=model_id,
-        train_image_dir=data_root_dir,
-        val_image_dir=data_root_dir,
-    )
-
-    trainer = build_trainer(name=Trainers.video_colorization, default_args=kwargs)
     trainer.evaluate()
