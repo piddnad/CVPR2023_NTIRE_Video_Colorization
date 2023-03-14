@@ -6,7 +6,7 @@ from modelscope.trainers.builder import TRAINERS
 from modelscope.trainers.trainer import EpochBasedTrainer
 from modelscope.trainers.base import BaseTrainer
 
-from baseline_evaluation import Evaluater
+from ntire23_scripts.baseline_evaluation import Evaluater
 
 
 @TRAINERS.register_module(module_name=Trainers.video_colorization)

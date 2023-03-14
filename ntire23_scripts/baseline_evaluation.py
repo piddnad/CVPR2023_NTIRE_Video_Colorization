@@ -73,7 +73,7 @@ class Evaluater(object):
 if __name__ == '__main__':
     model_id = 'damo/cv_unet_video-colorization'
     cache_path = os.path.expanduser('~/.cache/modelscope/hub/damo/cv_unet_video-colorization')
-    cfg_file = os.path.join(cache_path ,'configuration.json')
+    cfg_file = os.path.join(cache_path, 'configuration.json')
 
     kwargs = dict(
         cfg_file=cfg_file,
