@@ -30,7 +30,7 @@ class Evaluater(object):
     def __init__(self):
         self.task = Tasks.image_colorization
         self.model_id = 'damo/cv_unet_video-colorization'
-        cache_dir = 'datasets'
+        cache_dir = './datasets'
         val_set = MsDataset.load('ntire23_video_colorization', namespace='damo', subset_name='val_frames', split='validation', cache_dir=cache_dir)
         assert val_set is not None, 'val set should be downloaded first'
         self.dataset_dir = 'datasets/damo/ntire23_video_colorization/master/data_files/extracted'
@@ -41,7 +41,7 @@ class Evaluater(object):
         frame_paths.sort()
 
         colorizer = pipeline(task=self.task, model=self.model_id)
-        output_dir = 'results'
+        output_dir = './results'
 
         for img_path in tqdm.tqdm(frame_paths):
             result = colorizer(img_path)
